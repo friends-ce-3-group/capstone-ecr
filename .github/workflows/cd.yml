@@ -1,0 +1,18 @@
+name: Deploy or Teardown ECR
+
+on:
+  workflow_dispatch:
+    inputs:
+      choice:
+        type: choice
+        description: DeployOrTearDown
+        options:
+          - DeployECR
+          - TearDownECR
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo "${{ github.event.inputs.choice }}"
