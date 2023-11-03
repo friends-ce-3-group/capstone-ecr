@@ -25,12 +25,15 @@ jobs:
 
       - run: terraform init
 
+      - run: terraform validate
+
       - run: terraform plan
 
-      - run: |
+      - name: Setup or TearDown
+        run: |
           if [ ${{ github.event.inputs.deployment }} == 'Setup' ]; then  
-            echo "choice is deploy"
+            terraform apply -auto-approve
           elif [ ${{ github.event.inputs.deployment }} == 'TearDown' ]; then  
-            echo "choice is teardown"
+            terraform destroy -auto-approve
           fi
         shell: bash
