@@ -3,16 +3,28 @@ name: Deploy or Teardown ECR
 on:
   workflow_dispatch:
     inputs:
-      choice:
+      deployment:
         type: choice
         description: DeployOrTearDown
         options:
           - DeployECR
           - TearDownECR
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 jobs:
   cd:
     runs-on: ubuntu-latest
 
     steps:
-    - run: echo "${{ github.event.inputs.choice }}"
+      - uses: actions/checkout@v4
+    
+      - uses: hashicorp/setup-terraform@v2
+
+      - run: terraform init
+
+      - run: terraform plan
+
+      - run: echo "choice is ${{ github.event.inputs.deployment }}"
