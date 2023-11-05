@@ -1,5 +1,5 @@
 module "pythumbnailcapstone" {
-    source = "../../"
+  source = "../../"
 
-    repo_name = var.ecr_repo
+  repo_name = var.ecr_repo
 }

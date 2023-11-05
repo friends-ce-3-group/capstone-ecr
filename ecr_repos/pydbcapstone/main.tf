@@ -1,5 +1,5 @@
 module "pydbcapstone" {
-    source = "../../"
+  source = "../../"
 
-    repo_name = var.ecr_repo
+  repo_name = var.ecr_repo
 }
