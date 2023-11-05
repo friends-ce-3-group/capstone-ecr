@@ -1,3 +1,3 @@
 output "ecr_repo" {
-  value = aws_ecr_repository.ecr_capstone.repository_url
+  value = module.pythumbnailcapstone.ecr_repo_name
 }
