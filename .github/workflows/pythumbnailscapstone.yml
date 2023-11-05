@@ -18,6 +18,10 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./ecr_repos/pythumbnailcapstone
+        
     steps:
       - uses: actions/checkout@v4
     

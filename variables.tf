@@ -1,3 +1,3 @@
-variable "region" {
+variable "repo_name" {
   type = string
 }

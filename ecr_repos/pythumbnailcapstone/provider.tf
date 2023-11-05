@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "sctp-ce3-tfstate-bucket-1"
-    key    = "capstone-ecr-ecs-serverless.tfstate"
+    key    = "capstone-ecr-pythumbnailscapstone.tfstate"
     region = "us-east-1"
   }
 }

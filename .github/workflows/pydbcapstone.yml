@@ -1,0 +1,43 @@
+name: Deploy or Teardown ECR
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment:
+        type: choice
+        description: DeployOrTearDown
+        options:
+          - Setup
+          - TearDown
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./ecr_repos/pydbcapstone
+        
+    steps:
+      - uses: actions/checkout@v4
+    
+      - uses: hashicorp/setup-terraform@v2
+
+      - run: terraform init
+
+      - run: terraform validate
+
+      - run: terraform plan
+
+      - name: Setup or TearDown
+        run: |
+          if [ ${{ github.event.inputs.deployment }} == 'Setup' ]; then  
+            terraform apply -auto-approve
+          elif [ ${{ github.event.inputs.deployment }} == 'TearDown' ]; then  
+            terraform destroy -auto-approve
+          fi
+        shell: bash
