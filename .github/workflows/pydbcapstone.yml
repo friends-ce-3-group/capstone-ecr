@@ -1,4 +1,4 @@
-name: Deploy or Teardown ECR
+name: Deploy/Teardown pydbcapstone
 
 on:
   workflow_dispatch:
